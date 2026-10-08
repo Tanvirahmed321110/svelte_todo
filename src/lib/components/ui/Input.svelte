@@ -1,8 +1,8 @@
 <script>
-    let { placeholder = 'Enter Text...', type = 'text' } = $props();
+    let { placeholder = 'Enter Text...', type = 'text', value=$bindable('')} = $props();
 </script>
 
-<input {type} {placeholder} />
+<input {type} {placeholder} bind:value />
 
 <style>
     input {
