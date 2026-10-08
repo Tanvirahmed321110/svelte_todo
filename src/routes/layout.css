@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+
+body {
+    background-color: #222;
+    color: #ccc;
+}
+
+.section-gap {
+    margin-top: 48px;
+}
