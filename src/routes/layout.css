@@ -1,5 +1,16 @@
 @import 'tailwindcss';
 
+/* ============================================
+   Primary Color Theme (#461901)
+   ============================================ */
+@theme {
+    --color-primary: #461901;
+    --color-primary-hover: #5c2102;
+    --color-primary-active: #331200;
+    --color-primary-light: #6b2a05;
+    --color-primary-foreground: #ffffff;
+}
+
 body {
     background-color: #222;
     color: #ccc;
