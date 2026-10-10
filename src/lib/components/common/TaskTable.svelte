@@ -1,6 +1,6 @@
 <script>
     import Button from '../ui/Button.svelte';
-    let { tasks = [] } = $props();
+    import { tasks, deleteTask } from '#lib/stores/taskStore.js';
 </script>
 
 <div class="w-full max-w-3xl">
@@ -25,7 +25,7 @@
 
             <!-- Body -->
             <tbody class="divide-y divide-neutral-700">
-                {#each tasks as task, i (task.id)}
+                {#each $tasks as task, i (task.id)}
                     <tr
                         class="bg-neutral-900 transition hover:bg-neutral-800"
                     >
@@ -72,6 +72,7 @@
                                 size="sm"
                                 variant="danger"
                                 type="button"
+                                onclick={() => deleteTask(task.id)}
                             >
                                 🗑️Delete
                             </Button>

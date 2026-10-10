@@ -3,8 +3,8 @@
     import { Button } from '../../lib';
     import TaskTable from '../../lib/components/common/TaskTable.svelte';
 
-    // all tasks
-    let tasks = $state([]);
+    // store import
+    import { tasks, addTask } from '#lib/stores/taskStore.js';
 
     // form state
     let taskName = $state('');
@@ -35,10 +35,10 @@
 
         descError = '';
 
-        tasks.push({
-            id: Date.now(),
-            name,
-            desc: taskDesc.trim(),
+        // add task to store
+        addTask({
+            name: taskName,
+            desc: taskDesc,
             status: taskStatus
         });
 
@@ -110,7 +110,7 @@
         </div>
 
         <!--||=========  Table Here  =========|| -->
-        <TaskTable {tasks} />
+        <TaskTable />
     </div>
 </section>
 

@@ -41,6 +41,7 @@
         iconRight,
         class: className = '',
         children,
+        onclick,
         ...rest
     } = $props();
 
@@ -62,6 +63,7 @@
     class:full={fullWidth}
     class:is-loading={loading}
     class:is-disabled={isDisabled}
+    {onclick}
     {...rest}
 >
     {#if loading}
