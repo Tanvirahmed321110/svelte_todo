@@ -3,21 +3,54 @@
     import { Button } from '../../lib';
     import TaskTable from '../../lib/components/common/TaskTable.svelte';
 
+    // all tasks
+    let tasks = $state([]);
+
     // form state
     let taskName = $state('');
+    let taskDesc = $state('');
     let taskStatus = $state('pending');
+
+    let nameError = $state('');
+    let descError = $state('');
 
     // form submit handler
     function handleSubmit(e) {
         e.preventDefault();
 
+        // check name
+        const name = taskName.trim();
+        if (!name) {
+            nameError = 'Task Name দিতে হবে';
+            return;
+        }
+        nameError = '';
+
+        // check desc
+        const desc = taskDesc.trim();
+        if (!desc) {
+            descError = 'Task Desc দিতে হবে';
+            return;
+        }
+
+        descError = '';
+
+        tasks.push({
+            id: Date.now(),
+            name,
+            desc: taskDesc.trim(),
+            status: taskStatus
+        });
+
         // Data check
         console.log('Task Name:', taskName);
+        console.log('Desc:', taskDesc);
         console.log('Status:', taskStatus);
 
         // Form clear
         taskName = '';
         taskStatus = 'pending';
+        taskDesc = '';
     }
 </script>
 
@@ -32,8 +65,19 @@
                 <div class="mt-4 flex flex-col gap-4">
                     <div>
                         <Input
+                            label={'Task Name'}
+                            error={nameError}
                             bind:value={taskName}
                             placeholder="Enter Task Name..."
+                        />
+                    </div>
+
+                    <div>
+                        <Input
+                            label={'Desc'}
+                            bind:value={taskDesc}
+                            placeholder="Description"
+                            error={descError}
                         />
                     </div>
                     <div>
@@ -53,13 +97,25 @@
 
                     <!--========== Submit Button Here =========-->
                     <div>
-                        <Button fullWidth="1">Add Task</Button>
+                        <Button
+                            fullWidth="1"
+                            type="submit"
+                            title="click here"
+                        >
+                            Add Task
+                        </Button>
                     </div>
                 </div>
             </form>
         </div>
 
         <!--||=========  Table Here  =========|| -->
-        <TaskTable />
+        <TaskTable {tasks} />
     </div>
 </section>
+
+<style>
+    form {
+        width: 320px;
+    }
+</style>

@@ -48,67 +48,6 @@
     const isLink = $derived(!!href);
 </script>
 
-<!-- <script>
-    /**
-     * Button — Flexible polymorphic button/link component.
-     *
-     * Renders as `<button>` by default, or `<a>` when `href` is provided.
-     * Supports variants, sizes, icons, loading, disabled state, and full theming.
-     *
-     * @example
-     * ```svelte
-     * <Button>Save</Button>
-     * <Button variant="outline" size="lg">Large</Button>
-     * <Button href="/about">About</Button>
-     * <Button loading>Processing...</Button>
-     * <Button iconLeft={saveIcon} variant="primary">Save</Button>
-     * ```
-     */
-    let {
-        /** Visual style. @type {'primary'|'secondary'|'danger'|'success'|'outline'|'ghost'} @default 'primary' */
-        variant = 'primary',
-
-        /** Size. @type {'sm'|'md'|'lg'} @default 'md' */
-        size = 'md',
-
-        /** HTML button type. @type {'button'|'submit'|'reset'} @default 'button' */
-        type = 'button',
-
-        /** Take full width of container. @default false */
-        fullWidth = false,
-
-        /** Disable the button. @default false */
-        disabled = false,
-
-        /** Show spinner and hide content. @default false */
-        loading = false,
-
-        /** Border radius override. @type {'none'|'sm'|'md'|'lg'|'full'} */
-        rounded,
-
-        /** If set, renders as `<a>` instead of `<button>`. @type {string} */
-        href,
-
-        /** Snippet rendered before children. @type {import('svelte').Snippet} */
-        iconLeft,
-
-        /** Snippet rendered after children. @type {import('svelte').Snippet} */
-        iconRight,
-
-        /** Additional CSS classes. @type {string} @default '' */
-        class: className = '',
-
-        /** Main button content. @type {import('svelte').Snippet} */
-        children,
-
-        /** Any additional HTML attributes. */
-        ...rest
-    } = $props();
-
-    const isDisabled = $derived(disabled || loading);
-    const isLink = $derived(!!href);
-</script> -->
-
 <!-- ✦ ══════════════ ⚡ Element Here  ══════════════ ✦ -->
 <svelte:element
     this={isLink ? 'a' : 'button'}
