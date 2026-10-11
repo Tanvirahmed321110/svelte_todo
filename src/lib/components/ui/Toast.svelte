@@ -56,11 +56,11 @@
         position.includes('center')
             ? {
                   y: position.startsWith('top') ? -40 : 40,
-                  duration: 250
+                  duration: 400
               }
             : {
                   x: position.includes('right') ? 320 : -320,
-                  duration: 250
+                  duration: 400
               }
     );
 </script>
