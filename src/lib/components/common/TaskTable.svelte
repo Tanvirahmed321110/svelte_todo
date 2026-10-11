@@ -1,6 +1,15 @@
 <script>
     import Button from '../ui/Button.svelte';
     import { tasks, deleteTask } from '#lib/stores/taskStore.js';
+    import { toast } from '#lib/stores/toast.svelte.js';
+
+    function handleDelete(task) {
+        deleteTask(task.id);
+        toast.success(`"${task.name}"`, {
+            title: 'Delete',
+            duration: 4000
+        });
+    }
 </script>
 
 <div class="w-full max-w-3xl">
@@ -72,7 +81,7 @@
                                 size="sm"
                                 variant="danger"
                                 type="button"
-                                onclick={() => deleteTask(task.id)}
+                                onclick={() => handleDelete(task)}
                             >
                                 🗑️Delete
                             </Button>

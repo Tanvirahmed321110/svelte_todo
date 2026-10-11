@@ -4,6 +4,7 @@
     import type { LayoutProps } from './$types';
     import Footer from '#lib/components/layout/Footer.svelte';
     import Header from '#lib/components/layout/Header.svelte';
+    import Toast from '#lib/components/ui/Toast.svelte';
 
     let { children }: LayoutProps = $props();
 </script>
@@ -21,4 +22,7 @@
 
     <!-- Footer Here -->
     <Footer />
+
+    <!-- Toast Here -->
+    <Toast position="top-right"></Toast>
 </div>

@@ -1,14 +1,46 @@
 <!-- ✦ ══════════════  ⚡ Toast Component  ══════════════ ✦ -->
 <script>
     /**
-     * Toast — পুরো অ্যাপে একবার বসান (layout এ)।
+     * Toast — পুরো অ্যাপের notification বাক্স।
      *
+     * ═══ SETUP (একবারই, root layout এ) ═══
+     * src/routes/+layout.svelte এ বসান। পেজে পেজে বসাবেন না,
+     * নইলে একই toast একাধিকবার দেখাবে।
+     *
+     *     import Toast from '#lib/components/ui/Toast.svelte';
+     *     <Toast position="top-right" />
+     *
+     * ═══ USAGE (যেকোনো পেজ বা কম্পোনেন্ট থেকে) ═══
+     * <Toast /> কে সরাসরি ডাকবেন না। store এর `toast` ফাংশন ডাকুন:
+     *
+     *     import { toast } from '#lib/stores/toast.svelte.js';
+     *
+     *     toast.success('Task যোগ হয়েছে');
+     *     toast.error('ডিলিট হয়েছে');
+     *     toast.warning('ফর্ম অসম্পূর্ণ');
+     *     toast.info('সেভ হচ্ছে...');
+     *
+     *     toast.success('Saved', { title: 'সফল' });       // শিরোনাম সহ
+     *     toast.error('সমস্যা', { duration: 8000 });       // ৮ সেকেন্ড থাকবে
+     *     toast.info('লোড...', { duration: 0 });           // নিজে সরবে না
+     *
+     *     const id = toast.info('Uploading...', { duration: 0 });
+     *     toast.dismiss(id);                               // নির্দিষ্টটা সরানো
+     *     toast.clear();                                   // সব সরানো
+     *
+     * ═══ PROPS ═══
      * @prop {string} [position='top-right']
      *   top-right | top-left | top-center | bottom-right | bottom-left | bottom-center
+     *
+     * ═══ NOTES ═══
+     * - toast এর আসল তালিকা store ফাইলে থাকে (global state), এই ফাইল শুধু আঁকে।
+     * - পেজ বদলাতে `goto()` ব্যবহার করুন। `window.location` দিলে সব toast হারায়।
+     * - server কোডে (+page.server.js, load) toast ডাকবেন না, শুধু ব্রাউজারে।
      */
+
     import { fly } from 'svelte/transition';
     import { flip } from 'svelte/animate';
-    import { toasts, toast } from '$lib/stores/toast.svelte.js';
+    import { toasts, toast } from '#lib/stores/toast.svelte.js';
 
     let { position = 'top-right' } = $props();
 

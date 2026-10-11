@@ -2,6 +2,7 @@
     import Input from '#lib/components/ui/Input.svelte';
     import { Button } from '../../lib';
     import TaskTable from '../../lib/components/common/TaskTable.svelte';
+    import { toast } from '#lib/stores/toast.svelte.js';
 
     // store import
     import { tasks, addTask } from '#lib/stores/taskStore.js';
@@ -40,6 +41,12 @@
             name: taskName,
             desc: taskDesc,
             status: taskStatus
+        });
+
+        // toast show
+        toast.success(`"${name}" Successfully Added`, {
+            title: 'Added',
+            duration: 5000
         });
 
         // Data check
