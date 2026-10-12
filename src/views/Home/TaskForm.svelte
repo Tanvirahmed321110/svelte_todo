@@ -6,6 +6,8 @@
 
     // store import
     import { addTask, editingTask, updateTask } from '#lib/stores/taskStore.js';
+    import { products } from '#lib/data/products.js';
+    import ProductCard from '#lib/components/common/ProductCard.svelte';
 
     // form state
     let taskName = $state('');
@@ -143,6 +145,21 @@
 
         <!--||=========  Table Here  =========|| -->
         <TaskTable />
+    </div>
+</section>
+
+<!-- Products -->
+<section class="section-gap mb-8">
+    <div class="">
+        <h2 class="mb-4 text-xl font-bold">Products</h2>
+
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {#each products.slice(0, 4) as product (product.id)}
+                <ProductCard {product} />
+            {/each}
+        </div>
+
+        <div class="mt-5"><a href="/create_product">Create New</a></div>
     </div>
 </section>
 
