@@ -32,7 +32,7 @@ export const products = [
         price: 900,
         qty: 1,
         image: 'https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=600&q=80',
-        stock: 40,
+        stock: 1,
         desc: 'অফিস ও ক্যাজুয়াল দুই ক্ষেত্রেই পরার মতো স্লিম ফিট শার্ট।'
     },
     {
@@ -41,7 +41,7 @@ export const products = [
         price: 1800,
         qty: 1,
         image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80',
-        stock: 12,
+        stock: 4,
         desc: 'ড্রাগন ডিজাইনের স্টাইলিশ চেইন ব্রেসলেট।'
     },
     {
