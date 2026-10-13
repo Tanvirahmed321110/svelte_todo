@@ -1,0 +1,5 @@
+export const SITE_URL = 'https://yourdomain.com';
+export const SITE_NAME = 'Tourgull';
+export const SITE_TAGLINE = 'Tour, Flight, Hotel & More';
+export const SITE_DESCRIPTION =
+    'বাংলাদেশের সেরা ট্রাভেল মার্কেটপ্লেস — ট্যুর, ফ্লাইট, হোটেল, গাড়ি, খাবার সব এক জায়গায়';

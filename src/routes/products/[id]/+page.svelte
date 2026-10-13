@@ -1,26 +1,62 @@
 <script>
     import Button from '#lib/components/ui/Button.svelte';
+    import JsonLd from '#lib/components/common/JsonLd.svelte';
+    import Seo from '#lib/components/common/Seo.svelte';
+    import { SITE_URL } from '#lib/config.js';
 
     let { data } = $props();
     const product = $derived(data.product);
 
     const outOfStock = $derived(product.stock <= 0);
     const lowStock = $derived(product.stock > 0 && product.stock <= 5);
+
+    const productLd = $derived({
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: product.name,
+        image: [product.image],
+        description: product.desc,
+        sku: String(product.id),
+        offers: {
+            '@type': 'Offer',
+            url: `${SITE_URL}/products/${product.id}`,
+            priceCurrency: 'BDT',
+            price: product.price,
+            availability:
+                product.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock'
+        }
+    });
+
+    const breadcrumbLd = $derived({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+            { '@type': 'ListItem', position: 2, name: 'Products', item: `${SITE_URL}/products` },
+            { '@type': 'ListItem', position: 3, name: product.name }
+        ]
+    });
 </script>
 
-<svelte:head>
-    <title>{product.name}</title>
-</svelte:head>
+<!-- title, description, canonical, Open Graph -->
+<Seo title={product.name} description={product.desc} image={product.image} type="product" />
+
+<!-- Google এর জন্য schema -->
+<JsonLd data={productLd} />
+<JsonLd data={breadcrumbLd} />
 
 <section class="py-8">
     <div class="container mx-auto px-4">
         <!-- Breadcrumb -->
-        <nav class="mb-6 flex flex-wrap items-center gap-2 text-sm text-gray-400">
+        <nav
+            aria-label="Breadcrumb"
+            class="mb-6 flex flex-wrap items-center gap-2 text-sm text-gray-400"
+        >
             <a href="/" class="hover:text-white">Home</a>
-            <span>/</span>
+            <span aria-hidden="true">/</span>
             <a href="/products" class="hover:text-white">Products</a>
-            <span>/</span>
-            <span class="text-gray-200">{product.name}</span>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page" class="text-gray-200">{product.name}</span>
         </nav>
 
         <div class="grid gap-8 rounded-2xl bg-white p-5 shadow-sm md:grid-cols-2 md:p-8">
@@ -29,6 +65,9 @@
                 <img
                     src={product.image}
                     alt={product.name}
+                    width="600"
+                    height="600"
+                    fetchpriority="high"
                     class="h-80 w-full object-contain md:h-96"
                 />
 
