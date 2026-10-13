@@ -8,6 +8,7 @@
     import { addTask, editingTask, updateTask } from '#lib/stores/taskStore.js';
     import { products } from '#lib/data/products.js';
     import ProductCard from '#lib/components/common/ProductCard.svelte';
+    import QuickViewModal from '../../lib/components/common/QuickViewModal.svelte';
 
     // form state
     let taskName = $state('');
@@ -83,6 +84,15 @@
 
         resetForm();
     }
+
+    // For QuickView
+    let open = $state(false);
+    let selected = $state(null);
+
+    function handleQuickView(product) {
+        selected = product;
+        open = true;
+    }
 </script>
 
 <section class="section-gap">
@@ -155,12 +165,14 @@
 
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {#each products.slice(0, 4) as product (product.id)}
-                <ProductCard {product} />
+                <ProductCard {product} onquickview={handleQuickView} />
             {/each}
         </div>
 
         <div class="mt-5"><a href="/create_product">Create New</a></div>
     </div>
+
+    <QuickViewModal bind:open product={selected} />
 </section>
 
 <style>

@@ -3,6 +3,7 @@
     import { products } from '#lib/data/products.js';
     import Seo from '#lib/components/common/Seo.svelte';
     import JsonLd from '#lib/components/common/JsonLd.svelte';
+    import QuickViewModal from '../../lib/components/common/QuickViewModal.svelte';
 
     const listLd = $derived({
         '@context': 'https://schema.org',
@@ -14,6 +15,15 @@
             name: p.name
         }))
     });
+
+    // For Quickview
+    let open = $state(false);
+    let selected = $state(null);
+
+    function handleQuickView(product) {
+        selected = product;
+        open = true;
+    }
 </script>
 
 <Seo
@@ -29,8 +39,10 @@
     <div class=" mx-auto py-8">
         <div class="container mx-auto grid grid-cols-1 gap-4 px-4 sm:grid-cols-2 lg:grid-cols-4">
             {#each products as product (product.id)}
-                <ProductCard {product} />
+                <ProductCard {product} onquickview={handleQuickView} />
             {/each}
         </div>
     </div>
 </div>
+
+<QuickViewModal bind:open product={selected} />
