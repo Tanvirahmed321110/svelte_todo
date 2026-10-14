@@ -68,9 +68,7 @@
     {#if label}
         <label class="label" for={inputId}>
             {label}
-            {#if required}<span class="req" aria-hidden="true">
-                    *
-                </span>{/if}
+            {#if required}<span class="req" aria-hidden="true">*</span>{/if}
         </label>
     {/if}
 
@@ -135,6 +133,7 @@
         font-size: 13px;
         font-weight: 500;
         color: #ccc;
+        cursor: pointer;
     }
     .req {
         color: #dc2626;
@@ -170,8 +169,7 @@
     .input:focus {
         outline: none;
         border-color: var(--focus);
-        box-shadow: 0 0 0 3px
-            color-mix(in srgb, var(--focus) 20%, transparent);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 20%, transparent);
     }
 
     /* Icons */

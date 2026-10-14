@@ -1,9 +1,12 @@
 <script>
     import ProductCard from '#lib/components/common/ProductCard.svelte';
-    import { products } from '#lib/data/products.js';
+    // import { products } from '#lib/data/products.js';
     import Seo from '#lib/components/common/Seo.svelte';
     import JsonLd from '#lib/components/common/JsonLd.svelte';
     import QuickViewModal from '../../lib/components/common/QuickViewModal.svelte';
+    import { getProducts } from '#lib/stores/productStore.svelte.js';
+
+    let products = $derived(getProducts());
 
     const listLd = $derived({
         '@context': 'https://schema.org',

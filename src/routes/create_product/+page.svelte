@@ -1,3 +1,7 @@
-<section>
-    <div>Create Item</div>
-</section>
+<script>
+    import ProductFrom from '../../views/CreateProduct/ProductFrom.svelte';
+</script>
+
+<div class="">
+    <ProductFrom />
+</div>
