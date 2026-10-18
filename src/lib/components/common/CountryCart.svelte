@@ -1,3 +1,8 @@
+<script>
+    let { country } = $props();
+    let { country: name, iso2, cities } = $derived(country);
+</script>
+
 <article
     class="group overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
 >
@@ -17,7 +22,7 @@
 
     <!-- Info -->
     <div class="space-y-3 p-4">
-        <h2 class="truncate text-lg font-semibold text-gray-900">Bangladesh</h2>
+        <h2 class="truncate text-lg font-semibold text-gray-900">{name}</h2>
 
         <ul class="space-y-1.5 text-sm text-gray-600">
             <li class="flex items-center justify-between">
