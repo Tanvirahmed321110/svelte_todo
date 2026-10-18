@@ -5,7 +5,8 @@
         { href: '/', label: 'Home' },
         { href: '/about', label: 'About' },
         { href: '/tasks', label: 'Tasks' },
-        { href: '/products', label: 'Products' }
+        { href: '/products', label: 'Products' },
+        { href: '/country', label: 'Country' }
     ];
 </script>
 
