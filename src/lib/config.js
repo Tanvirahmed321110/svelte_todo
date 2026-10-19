@@ -11,8 +11,3 @@ export const config = {
     country: { baseUrl: PUBLIC_COUNTRY_API_URL },
     weather: { baseUrl: PUBLIC_WEATHER_API_URL }
 };
-
-// export const config = {
-//     country: { baseUrl: 'https://countriesnow.space/api/v0.1' },
-//     weather: { baseUrl: 'https://countriesnow.space/api/v0.1' }
-// };

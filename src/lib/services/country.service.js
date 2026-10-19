@@ -1,23 +1,20 @@
 import { config } from '#lib/config.js';
 
-// সব দেশের লিস্ট আনার ফাংশন
+let cache = null;
+let cacheTime = 0;
+const TTL = 60 * 60 * 1000; // ১ ঘণ্টা
+
 export async function getAllCountries() {
-    try {
-        // সরাসরি fetch ব্যবহার করছি
-        const response = await fetch(`${config.country.baseUrl}/countries`);
-
-        // এরর চেক করা (apiClient-এ যেমন ছিল)
-        if (!response.ok) {
-            throw new Error(`API Error: ${response.status}`);
-        }
-
-        // ডেটাকে JSON-এ কনভার্ট করা
-        const data = await response.json();
-
-        // countriesnow API-তে ডেটা থাকে data.data অবজেক্টের ভেতর
-        return data.data;
-    } catch (error) {
-        console.error('দেশ আনার সময় সমস্যা হয়েছে:', error);
-        throw error; // SvelteKit-এর +error.svelte পেজে পাঠানোর জন্য
+    // cache থাকলে instant return
+    if (cache && Date.now() - cacheTime < TTL) {
+        return cache;
     }
+
+    const res = await fetch(`${config.country.baseUrl}/countries`);
+    if (!res.ok) throw new Error(`API Error: ${res.status}`);
+
+    const json = await res.json();
+    cache = json.data;
+    cacheTime = Date.now();
+    return cache;
 }
